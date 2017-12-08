@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<div style='width:60%;margin-left:20%'>
+	<h1>Ajouter une conversation</h1>
+	<br>
+	<a  href="{{ path('homepage') }}"  class="btn btn-success">Retour</a>
+	<br><br><br><br>
+
+	{{ form_start(form) }}
+
+          {{ form_row(form.name) }}
+          <button type="submit"  method='POST' class="btn btn-info">Ajouter</button>
+
+    {{ form_end(form) }}
+
+  <br>
+        
+       
+	</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

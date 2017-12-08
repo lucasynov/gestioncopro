@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div style='width:90%;margin-left:5%'>
+	<h1>Gestion de la copropriété</h1>
+	<h3>Bonjour, {{ username }}</h3>
+
+	<p> Ton email est : {{ email }} </p>
+
+
+
+
+	<h3>Membre de la copro :</h3>
+	<br>
+	<table class="table table-dark" >
+		<tr>
+			<th>Nom</th>
+			<th>Email</th>
+		</tr>
+
+	    {% for user in users %}
+	    <tr>
+	        <td>{{ user.username }}</td>
+	        <td>{{ user.email }}</td>
+	    </tr>
+	    {% endfor %}
+	</table>
+	<br>
+
+
+	<h3>Voici la liste des réunions prévus :</h3>
+	<br>
+	<a href="{{ path('AddReunion') }}" class="btn btn-success btn-success"><span class="glyphicon glyphicon-pencil"></span> Organiser une réunion</a>
+	<br><br>
+	<table class="table table-dark" >
+		<tr>
+			<th>Date</th>
+			<th>Nom de la réunion</th>
+			<th>Organisateur</th>
+			<th>Compte Rendu</th>
+		</tr>
+
+	    {% for reunion in reunions %}
+	    <tr>
+	        <td>{{ reunion.date | date }}</td>
+	        <td>{{ reunion.name }}</td>
+	        <td>{{ reunion.organisateur }}</td>
+	        <td>{{ reunion.compte_rendu }}</td>
+	    </tr>
+	    {% endfor %}
+	</table>
+
+	<br><br>
+
+	<h3>Voici les conversations en cours :</h3>
+	<br>
+	<a href="{{ path('AddConversation') }}" class="btn btn-success btn-success"><span class="glyphicon glyphicon-pencil"></span> Créer une nouvelle conversation</a>
+	<br><br>
+	<table class="table table-dark" >
+		<tr>
+			<th>Nom de la conversation</th>
+			<th>ID</th>
+			<th>Actions</th>
+		</tr>
+
+	    {% for conversation in conversationUsers %}
+	    <tr>
+	        <td>{{ conversation.name }}</td>
+	         <td>{{ conversation.id_conversation }}</td>
+	        <td><a href="{{ path('showConversation', {'id_conversation': conversation.id_conversation}) }}" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-pencil"></span>Converser</a></td>
+	    </tr>
+	    {% endfor %}
+	</table>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

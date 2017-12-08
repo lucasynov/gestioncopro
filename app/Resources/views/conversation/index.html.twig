@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<div style='width:60%;margin-left:20%'>
+	<h1>{{ name }}</h1>
+	
+	<a  href="{{ path('homepage') }}"  class="btn btn-success">Retour</a>
+	<br><br><br>
+		
+		{% for message in messages %}
+		 	{% if(message.idUser == idUser)  %}
+		 	<p class="speech-bubble" id='my_message'>
+		        {{ message.date | date }}
+		        <b>{{ message.message }}</b><br>
+		        <i>Signé :</i> {{ message.username }}
+		    </p>
+		    {% else %}
+		    <p class="speech-bubble-autre" id='autre_message'>
+		    	 {{ message.date | date }}
+		        <b>{{ message.message }}</b><br>
+		        <i>Signé :</i> {{ message.username }}
+		    </p>
+		    {% endif %}
+		    <br><br><br><br><br><br>
+	    {% endfor %}
+
+	{{ form_start(form) }}
+
+          {{ form_row(form.message) }}
+          <button type="submit"  method='POST' class="btn btn-info">Envoyer</button>
+
+    {{ form_end(form) }}
+
+  <br>
+        
+       
+	</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

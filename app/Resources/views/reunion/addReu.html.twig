@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div style='width:90%;margin-left:5%'>
+<br>
+  {% if message is defined %}
+    <div class="alert alert-success">
+      {{ message }}
+    </div>
+  {% endif %}
+
+  {% if messageFalse is defined %}
+    <div class="alert alert-danger">
+      {{ messageFalse }}
+    </div>
+  {% endif %}
+  <form class="form-horizontal" method='POST' action=''>
+  <fieldset>
+
+
+    <legend>Organiser une réunion :</legend>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Date</label>  
+          <div class="col-md-4">
+          <input id="textinput" name="date" placeholder="2017-12-06 14:15:00 (Format Américain)" class="form-control input-md" type="text">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Nom de la réunion</label>  
+          <div class="col-md-4">
+          <input id="textinput" name="name" placeholder="" class="form-control input-md" type="text">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+        <button type="submit"  method='POST' class="btn btn-primary">Organiser cette réunion</button>
+      </div>
+
+    </fieldset>
+  </form>
+  <div class="col-md-4">
+  <br>
+        <a  href="{{ path('homepage') }}"  class="btn btn-success">Retour</a>
+  </div>
+  
+</div>
+{% endblock %}
+
+
+
+
