@@ -29,10 +29,12 @@ class ConversationUser
     private $idConversation;
 
 
-    public function __construct()
+    public function __construct($idUser,$idConversation)
     {
-       
+       $this->idUser = $idUser;
+       $this->idConversation = $idConversation;
     }
+
 
     public function getId()
     {

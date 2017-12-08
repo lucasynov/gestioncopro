@@ -11,6 +11,18 @@
 	{{ form_start(form) }}
 
           {{ form_row(form.name) }}
+          <br>
+          <h4>Sélectionner les copropriétaires</h4>
+          <br>
+          {% for user in users %}
+          <div>
+
+		    <input type="checkbox" id="" name="check_list[]" value='{{ user.id }}'>
+		    <label for="subscribeNews">{{ user.username }}</label>
+		  </div>
+		  {% endfor %}
+
+
           <button type="submit"  method='POST' class="btn btn-info">Ajouter</button>
 
     {{ form_end(form) }}

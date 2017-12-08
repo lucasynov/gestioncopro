@@ -96,15 +96,32 @@ class ConversationController extends Controller
             ->getForm();
         
         $UserRepository = $this->get('doctrine')->getRepository('AppBundle:User');
+        $ConversUserRepo = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
         $users = $UserRepository->findAll();
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){ 
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($conversation);
             $em->flush();
+            $id_conversation = $conversation->getId();
+
+
+            if($_POST != []){
+                if(isset($_POST['check_list']) && $_POST['check_list'] != []){
+                    foreach($_POST['check_list'] as $key => $idUser){
+                        $ConversUserRepo->insertConversationUser($idUser,$id_conversation);
+                    }            
+                }else{
+                    foreach($users as $key => $User){
+                        $ConversUserRepo->insertConversationUser($User->getId(),$id_conversation);
+                    } 
+                }
+            }
+
+
         }
 
 
