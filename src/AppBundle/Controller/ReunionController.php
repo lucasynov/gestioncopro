@@ -19,7 +19,7 @@ class ReunionController extends Controller
    
     
      /**
-     * @Route("/reunion/", name="AddReunion")
+     * @Route("/reunion", name="AddReunion")
      */
     public function createAction()
     {
@@ -52,11 +52,14 @@ class ReunionController extends Controller
                 $em->persist($reunion);
 
                 $em->flush();
-                $message =  "Votre réunion a bien été enregistré ";
 
-                return $this->render('/reunion/addReu.html.twig', array(
-                    'message' => $message,
-                ));
+                $this->addFlash(
+                    'notice',
+                    'Votre réunion a bien été enregistré !!'
+                );
+
+                return $this->redirectToRoute('reunions');
+
 
             }catch(Exception $e){
 

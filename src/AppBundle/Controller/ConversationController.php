@@ -23,7 +23,7 @@ class ConversationController extends Controller
    
     
      /**
-     * @Route("/conversation/", name="showConversation")
+     * @Route("/conversation", name="showConversation")
      */
     public function showAction(Request $request)
     {

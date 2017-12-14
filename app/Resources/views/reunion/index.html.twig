@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+	<h3>Voici la liste des réunions prévus :</h3>
+	<br>
+	<a href="{{ path('AddReunion') }}" class="btn btn-success btn-success"><span class="glyphicon glyphicon-pencil"></span> Organiser une réunion</a>
+	<br><br>
+	<p>Si vous voulez organiser une réunion, cette réunion sera organisé par défaut à votre docmicile.</p>
+	<p>Vous pourrez à la suite de la réunion joindre un compte rendu de cette réunion.</p>
+	<table class="table table-dark" >
+		<tr>
+			<th>Date</th>
+			<th>Nom de la réunion</th>
+			<th>Organisateur</th>
+			<th>Compte Rendu</th>
+		</tr>
+
+	    {% for reunion in reunions %}
+	    <tr>
+	        <td>{{ reunion.date | date }}</td>
+	        <td>{{ reunion.name }}</td>
+	        <td>{{ reunion.organisateur }}</td>
+	        <td>{{ reunion.compte_rendu }}</td>
+	    </tr>
+	    {% endfor %}
+	</table>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

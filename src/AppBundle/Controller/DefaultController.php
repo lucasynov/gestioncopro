@@ -79,6 +79,54 @@ class DefaultController extends Controller
 
 
 
+    /**
+     * @Route("/coproprietaire", name="coproprietaire")
+     */
+    public function showCoproprioAction(){
+        $UserRepository = $this->get('doctrine')->getRepository('AppBundle:User');
+        $users = $UserRepository->findAll();
+
+        $user = $this->getUser();
+        $username = $user->getUsername();
+        $email = $user->getEmail();
+
+        return $this->render('coproprietaire/index.html.twig', array(
+            'username' => $username,
+            'email' => $email,
+            'users' => $users,
+        ));
+    }
+
+
+    /**
+     * @Route("/reunions", name="reunions")
+     */
+    public function showReunionAction(){
+        $ReunionRepository = $this->get('doctrine')->getRepository('AppBundle:Reunion');
+        $reunions = $ReunionRepository->findAll();
+    
+        return $this->render('reunion/index.html.twig', array(
+            'reunions' => $reunions,
+        ));
+    }
+
+
+
+    /**
+     * @Route("/conversations", name="conversations")
+     */
+    public function showConversationAction(){
+         $ConversationUserRepository = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
+        $user = $this->getUser();
+        $idUser = $user->getId();
+        $conversationUsers = $ConversationUserRepository->getOurConversation($idUser);   
+    
+        return $this->render('conversation/indexConvers.html.twig', array(
+            'conversationUsers' => $conversationUsers,
+        ));
+    }
+
+
 
     public function showAction()
     {
@@ -98,3 +146,7 @@ class DefaultController extends Controller
         return new Response(var_dump($product));
     }
 }
+
+
+
+
