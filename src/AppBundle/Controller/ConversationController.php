@@ -83,6 +83,34 @@ class ConversationController extends Controller
 
 
 
+
+
+    /**
+     * @Route("/archiveConversation/", name="archiveConversation")
+     */
+    public function archiveConversation(Request $request)
+    {
+        $id_conversation = $_GET['id_conversation'];
+        $ConversationRepository = $this->get('doctrine')->getRepository('AppBundle:Conversation');
+        $conversation = new Conversation();
+        $conversation = $ConversationRepository->findOneBy(['id' => $id_conversation]);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($conversation);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'La conversation a été archivée'
+        );
+
+        return $this->redirectToRoute('conversations');
+    }
+
+
+
+
+
     /**
      * @Route("/conversation_new/", name="AddConversation")
      */

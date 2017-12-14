@@ -4,6 +4,8 @@
 
 	<h3>Bonjour, {{ username }}</h3>
 
+	
+	
 	<p> Ton email est : {{ email }} </p>
 
 	<p>Voici les membres de ta copropriété : tu peux les contacter en utilisant l'onglet conversation.</p>
@@ -13,12 +15,18 @@
 		<tr>
 			<th>Nom</th>
 			<th>Email</th>
+			<th>Role</th>
 		</tr>
 
 	    {% for user in users %}
 	    <tr>
 	        <td>{{ user.username }}</td>
 	        <td>{{ user.email }}</td>
+	        <td>
+	        {% for roles in user.roles %}
+		        {{ roles }}<br>
+		    {% endfor %}
+	        </td>
 	    </tr>
 	    {% endfor %}
 	</table>

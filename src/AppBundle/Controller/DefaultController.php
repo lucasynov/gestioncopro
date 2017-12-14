@@ -62,8 +62,6 @@ class DefaultController extends Controller
         $email = $user->getEmail();
         $idUser = $user->getId();
 
-
-
         $reunions = $ReunionRepository->findAll();
         $users = $UserRepository->findAll();
         $conversationUsers = $ConversationUserRepository->getOurConversation($idUser);   
@@ -113,6 +111,21 @@ class DefaultController extends Controller
 
 
     /**
+     * @Route("/charhes", name="charges")
+     */
+    public function showChargesAction(){
+        $ChargesRepository = $this->get('doctrine')->getRepository('AppBundle:Charges');
+        $charges = $ChargesRepository->findAll();
+
+    
+        return $this->render('charges/index.html.twig', array(
+            'charges' => $charges,
+        ));
+    }
+
+
+
+    /**
      * @Route("/conversations", name="conversations")
      */
     public function showConversationAction(){
@@ -125,6 +138,7 @@ class DefaultController extends Controller
             'conversationUsers' => $conversationUsers,
         ));
     }
+
 
 
 

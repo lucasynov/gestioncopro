@@ -9,12 +9,18 @@
 			<tr>
 				<th>Nom de la conversation</th>
 				<th>Actions</th>
+				{% if is_granted('ROLE_ADMIN') %}
+					<th>Administration</th>
+				{% endif %}
 			</tr>
 
 		    {% for conversation in conversationUsers %}
 		    <tr>
 		        <td>{{ conversation.name }}</td>
-		        <td><a href="{{ path('showConversation', {'id_conversation': conversation.id_conversation}) }}" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-pencil"></span>Converser</a></td>
+		        <td><a href="{{ path('showConversation', {'id_conversation': conversation.id_conversation}) }}" class="btn btn-primary btn-info"><i class="fa fa-fw fa-comments"></i></span>Converser</a></td>
+		        {% if is_granted('ROLE_ADMIN') %}
+					<td><a href="{{ path('archiveConversation', {'id_conversation': conversation.id_conversation}) }}" class="btn btn-primary btn-danger"><i class="fa fa-fw fa-trash-o"></i></span>Archiver</a>
+				{% endif %}
 		    </tr>
 		    {% endfor %}
 		</table>
