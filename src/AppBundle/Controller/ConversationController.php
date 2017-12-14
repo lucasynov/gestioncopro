@@ -121,6 +121,8 @@ class ConversationController extends Controller
                 }
             }
 
+            
+            return $this->redirectToRoute('homepage');
 
         }
 
