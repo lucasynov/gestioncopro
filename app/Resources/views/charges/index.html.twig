@@ -4,8 +4,9 @@
 
 
 
-	<h3>Voici la liste des charges :</h3>
-
+	<h3>Voiçi la liste des charges :</h3><br>
+	<a href="{{ path('AddCharge') }}" class="btn btn-success btn-success"><span class="glyphicon glyphicon-pencil"></span> 	Créer une nouvelle charge</a>
+	<br><br>
 	<table class="table table-dark" >
 		<tr>
 			<th>Titre </th>
@@ -20,9 +21,9 @@
 	    {% for charge in charges %}
 	    <tr>
 	        <td>{{ charge.titre }}</td>
-	        <td>{{ charge.montant }}</td>
+	        <td>{{ charge.montant }} €</td>
+	        <td>{{ charge.dateEcheance | date("m/d/Y")  }} </td>
 	        <td>{{ charge.copropritaires }}</td>
-	        <td>{{ charge.montant }}</td>
 	        <td>{{ charge.statut }}</td>
 	        <td>{{ charge.pieceJointe }}</td>
 	        <td>{{ charge.idContrat }}</td>

@@ -20,7 +20,7 @@
 
 	    {% for reunion in reunions %}
 	    <tr>
-	        <td>{{ reunion.date | date }}</td>
+	        <td>{{ reunion.date | date("m/d/Y   H:i") }}</td>
 	        <td>{{ reunion.name }}</td>
 	        <td>{{ reunion.organisateur }}</td>
 	        <td>{{ reunion.compte_rendu }}</td>

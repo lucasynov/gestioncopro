@@ -216,5 +216,28 @@ class Charges
 
         return $this;
     }
+
+
+
+     public function getdateEcheance()
+    {
+        return $this->dateEcheance;
+    }
+
+
+
+    /**
+     * Set dateEcheance
+     *
+     * @param datetime $dateEcheance
+     *
+     * @return Charges
+     */
+    public function setdateEcheance($dateEcheance)
+    {
+        $this->dateEcheance = $dateEcheance;
+
+        return $this;
+    }
 }
 

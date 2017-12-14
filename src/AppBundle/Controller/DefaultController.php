@@ -111,7 +111,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/charhes", name="charges")
+     * @Route("/charges", name="charges")
      */
     public function showChargesAction(){
         $ChargesRepository = $this->get('doctrine')->getRepository('AppBundle:Charges');
