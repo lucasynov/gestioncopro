@@ -86,7 +86,7 @@ class ChargeController extends Controller
 
         $this->addFlash(
             'notice',
-            'La charge a été archivée !'
+            'La charge a été archivée !!'
         );
 
         return $this->redirectToRoute('charges');
