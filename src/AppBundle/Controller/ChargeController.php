@@ -13,6 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Entity\User;
 use AppBundle\Repository\UserRepository;
 
+
+use AppBundle\Repository\ChargesRepository;
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -60,5 +63,32 @@ class ChargeController extends Controller
         ));   
     }
     
+    
+    
+    
+    
+    
+    /**
+     * @Route("/archiveCharge/", name="archiveCharge")
+     */
+    public function archiveCharge(Request $request)
+    {
+        $id_charge = $_GET['id_charge'];
+        
+        
+        $ChargesRepository = $this->get('doctrine')->getRepository('AppBundle:Charges');
+        $charge = new Charges();
+        $charge = $ChargesRepository->findOneBy(['id' => $id_charge]);
 
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($charge);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'La charge a été archivée !'
+        );
+
+        return $this->redirectToRoute('charges');
+    }
 }

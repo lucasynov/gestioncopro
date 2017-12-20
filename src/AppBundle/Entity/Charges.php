@@ -74,6 +74,11 @@ class Charges
 
 
 
+    
+    
+    public function getId(){
+        return $this->id;
+    }
 
 
 

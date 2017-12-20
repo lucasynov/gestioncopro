@@ -16,6 +16,9 @@
 			<th>Statut</th>
 			<th>Pièce jointe </th>
 			<th>Contrat  </th>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <th></th>                        
+                        {% endif %}
 		</tr>
 
 	    {% for charge in charges %}
@@ -27,6 +30,9 @@
 	        <td>{{ charge.statut }}</td>
 	        <td>{{ charge.pieceJointe }}</td>
 	        <td>{{ charge.idContrat }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+			<td><a href="{{ path('archiveCharge', {'id_charge':  charge.id }) }}" class="btn btn-primary btn-danger"><i class="fa fa-fw fa-trash-o"></i></span>Archiver                        
+                {% endif %}
 	    </tr>
 	    {% endfor %}
 	</table>
