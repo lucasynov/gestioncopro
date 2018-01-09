@@ -44,7 +44,7 @@ class Message
 
     public function __construct()
     {
-       
+
     }
 
     public function getId()
@@ -71,7 +71,7 @@ class Message
     {
         return $this->id_conversation;
     }
-
+    
 
 
     /**

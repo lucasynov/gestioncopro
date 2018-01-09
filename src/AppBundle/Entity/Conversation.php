@@ -24,7 +24,15 @@ class Conversation
     private $name;
 
 
-
+    /**
+     * @var int
+     *
+     */
+    private $copropritaires;
+    
+    
+    
+    
 
     public function __construct()
     {

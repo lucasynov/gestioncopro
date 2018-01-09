@@ -36,8 +36,7 @@ class ReunionController extends Controller
                 }else{
                     $date_format = date_create_from_format('Y-m-d H:i:s',$date);
                 }
-                
-
+               
                 $name = $_POST['name'];
                 $user = $this->getUser();
                 $username = $user->getUsername();
@@ -48,9 +47,7 @@ class ReunionController extends Controller
                 $reunion->setOrganisateur($username);
                 $reunion->setId();
 
-                
                 $em->persist($reunion);
-
                 $em->flush();
 
                 $this->addFlash(

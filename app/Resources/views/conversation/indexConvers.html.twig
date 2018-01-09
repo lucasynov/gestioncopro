@@ -2,17 +2,17 @@
 
 {% block body %}
 	<h3>Voici les conversations en cours :</h3>
-		<br>
-		<a href="{{ path('AddConversation') }}" class="btn btn-success btn-success"><span class="glyphicon glyphicon-pencil"></span> Créer une nouvelle conversation</a>
-		<br><br>
-		<table class="table table-dark" >
-			<tr>
-				<th>Nom de la conversation</th>
-				<th>Actions</th>
-				{% if is_granted('ROLE_ADMIN') %}
-					<th>Administration</th>
-				{% endif %}
-			</tr>
+            <br>
+            <a href="{{ path('AddConversation') }}" class="btn btn-success btn-success"><span class="glyphicon glyphicon-pencil"></span> Créer une nouvelle conversation</a>
+            <br><br>
+            <table class="table table-dark" >
+                    <tr>
+                            <th>Nom de la conversation</th>
+                            <th>Actions</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                    <th>Administration</th>
+                            {% endif %}
+                    </tr>
 
 		    {% for conversation in conversationUsers %}
 		    <tr>
@@ -23,7 +23,7 @@
 				{% endif %}
 		    </tr>
 		    {% endfor %}
-		</table>
+            </table>
 
 {% endblock %}
 

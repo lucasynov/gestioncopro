@@ -8,11 +8,11 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <!-- Bootstrap core CSS-->
-          <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+          <link href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
           <!-- Custom fonts for this template-->
-          <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+          <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
           <!-- Custom styles for this template-->
-          <link href="css/sb-admin.css" rel="stylesheet">
+          <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
     {% endblock %}
         
   <meta charset="utf-8">
@@ -114,12 +114,12 @@
       </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
+    <script src="{{ asset('js/sb-admin.min.js') }}"></script>
     <!-- Custom scripts for this page-->
     <!-- Toggle between fixed and static navbar-->
     <script>

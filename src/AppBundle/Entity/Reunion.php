@@ -34,7 +34,7 @@ class Reunion
     private $organisateur;
 
     /**
-     * @ORM\Column(name="compte_rendu", type="string", length=100)
+     * @ORM\Column(name="compte_rendu", type="string", length=100 ,nullable=true)
      */
     private $compte_rendu;
 

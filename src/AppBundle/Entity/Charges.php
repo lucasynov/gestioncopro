@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AppCharges
@@ -43,23 +44,31 @@ class Charges
     private $statut;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="copropritaires", type="string", length=100, nullable=false)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="charges",  cascade={"persist"})
      */
     private $copropritaires;
 
+    
+    
+    
     /**
-     * @var string
+     * @ORM\Column(name="piece_jointe", type="string", nullable=true)
      *
-     * @ORM\Column(name="piece_jointe", type="string", length=100, nullable=false)
+     * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $pieceJointe;
 
+    
+    
+    
+    
+    
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_contrat", type="integer", nullable=false)
+     * @ORM\Column(name="id_contrat", type="integer", nullable=true)
      */
     private $idContrat;
 
@@ -71,9 +80,14 @@ class Charges
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-
-
+        
+    
+    
+    public function __construct() {
+        $this->copropritaires = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    
     
     
     public function getId(){
@@ -82,10 +96,13 @@ class Charges
 
 
 
-     public function getTitre()
+    public function getTitre()
     {
         return $this->titre;
     }
+    
+    
+    
 
 
 
@@ -140,20 +157,32 @@ class Charges
     /**
      * Set copropritaires
      *
-     * @param string $copropritaires
+     * @param User $copropritaires
      *
      * @return Charges
      */
-    public function setcoproprietaires($copropritaires)
+    public function setcopropritaires($copropritaires)
     {
-        $this->copropritaires = $copropritaires;
+        $this->copropritaires = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach ($copropritaires as $copropritaire) {
+            $copropritaire->addCharge($this);
+            $this->addCoproprietaire($copropritaire);
+        }
 
         return $this;
     }
 
+    public function addCoproprietaire($coproprietaire)
+    {
+        $this->copropritaires->add($coproprietaire);
+    }
 
+    public function removeCoproprietaire($coproprietaire)
+    {
+        $this->copropritaires->remove($coproprietaire);
+    }
 
-      public function getstatut()
+    public function getstatut()
     {
         return $this->statut;
     }

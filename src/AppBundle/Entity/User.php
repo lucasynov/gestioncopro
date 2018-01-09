@@ -17,6 +17,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
      */
     private $id;
 
@@ -45,12 +46,27 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
+    
+    
+    /**
+     * @var int
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Charges", inversedBy="user", cascade={"persist"})
+     */
+    private $charges;
+    
+   
 
 
+    
+    
+    
+  
 
     public function __construct()
     {
         $this->isActive = true;
+        $this->charges = new \Doctrine\Common\Collections\ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -118,5 +134,20 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
+    }
+    
+    
+    public function __toString() {
+        return $this->username;
+    }
+
+    public function addCharge($charge)
+    {
+        $this->charges->add($charge);
+    }
+
+    public function removeCharge($charge)
+    {
+        $this->charges->remove($charge);
     }
 }

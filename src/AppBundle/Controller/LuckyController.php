@@ -14,10 +14,17 @@ class LuckyController extends Controller
      */
     public function numberAction()
     {
-        $number = mt_rand(0, 100);
+        $number = mt_rand(0, 10);
+        
+        $a = 1;
+        $b = 6;
+        
+        $c = $a + $b;
 
         return $this->render('lucky/number.html.twig', array(
             'number' => $number,
+            'nom' => 'Jojo',
+            'y' => $c,
         ));
     }
 }

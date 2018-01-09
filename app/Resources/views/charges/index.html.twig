@@ -26,9 +26,16 @@
 	        <td>{{ charge.titre }}</td>
 	        <td>{{ charge.montant }} €</td>
 	        <td>{{ charge.dateEcheance | date("m/d/Y")  }} </td>
-	        <td>{{ charge.copropritaires }}</td>
+	       
 	        <td>{{ charge.statut }}</td>
-	        <td>{{ charge.pieceJointe }}</td>
+                <td>
+                    
+                    {% if(charge.piecejointe) is null %}
+                        <a href="{{ path('addPieceJointe', {'id_charge':  charge.id }) }}" class="btn btn-primary btn-primary"><i class="fa fa-fw fa-plus"></i></span>Ajouter une pièce jointe
+                    {% else %}
+                        <a href="{{ asset('uploads/piecesJointes/' ~ charge.piecejointe) }}">Voir la pièce jointe</a>
+                    {% endif %}
+                </td>
 	        <td>{{ charge.idContrat }}</td>
                 {% if is_granted('ROLE_ADMIN') %}
 			<td><a href="{{ path('archiveCharge', {'id_charge':  charge.id }) }}" class="btn btn-primary btn-danger"><i class="fa fa-fw fa-trash-o"></i></span>Archiver                        

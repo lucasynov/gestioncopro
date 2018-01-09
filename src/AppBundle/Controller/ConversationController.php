@@ -94,7 +94,7 @@ class ConversationController extends Controller
         $ConversationRepository = $this->get('doctrine')->getRepository('AppBundle:Conversation');
         $conversation = new Conversation();
         $conversation = $ConversationRepository->findOneBy(['id' => $id_conversation]);
-
+        
         $em = $this->getDoctrine()->getManager();
         $em->remove($conversation);
         $em->flush();
@@ -136,7 +136,7 @@ class ConversationController extends Controller
             $em->flush();
             $id_conversation = $conversation->getId();
 
-
+            
             if($_POST != []){
                 if(isset($_POST['check_list']) && $_POST['check_list'] != []){
                     foreach($_POST['check_list'] as $key => $idUser){
@@ -150,7 +150,7 @@ class ConversationController extends Controller
             }
 
             
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('conversations');
 
         }
 

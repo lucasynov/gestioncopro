@@ -56,6 +56,7 @@ class DefaultController extends Controller
         $UserRepository = $this->get('doctrine')->getRepository('AppBundle:User');
         $ReunionRepository = $this->get('doctrine')->getRepository('AppBundle:Reunion');
         $ConversationUserRepository = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
+       
 
         $user = $this->getUser();
         $username = $user->getUsername();
@@ -65,6 +66,7 @@ class DefaultController extends Controller
         $reunions = $ReunionRepository->findAll();
         $users = $UserRepository->findAll();
         $conversationUsers = $ConversationUserRepository->getOurConversation($idUser);   
+       
        
         return $this->render('index/index.html.twig', array(
             'username' => $username,
@@ -116,8 +118,7 @@ class DefaultController extends Controller
     public function showChargesAction(){
         $ChargesRepository = $this->get('doctrine')->getRepository('AppBundle:Charges');
         $charges = $ChargesRepository->findAll();
-
-    
+        
         return $this->render('charges/index.html.twig', array(
             'charges' => $charges,
         ));
@@ -130,12 +131,15 @@ class DefaultController extends Controller
      */
     public function showConversationAction(){
          $ConversationUserRepository = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
+        
         $user = $this->getUser();
         $idUser = $user->getId();
         $conversationUsers = $ConversationUserRepository->getOurConversation($idUser);   
+       
     
         return $this->render('conversation/indexConvers.html.twig', array(
             'conversationUsers' => $conversationUsers,
+            
         ));
     }
 
