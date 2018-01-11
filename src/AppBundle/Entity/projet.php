@@ -5,16 +5,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
+
+
 /**
  * Projet
  *
  * @ORM\Table(name="projet")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProjetRepository")
  */
-
-
-
-
 class Projet
 {
     /**

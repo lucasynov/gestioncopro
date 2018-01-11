@@ -83,7 +83,7 @@ class ProjetController extends Controller
     /**
      * Finds and displays a projet entity.
      *
-     * @Route("/{id}", name="projet_show")
+     * @Route("/projects/{id}", name="projet_show")
      * @Method({"GET", "POST"})
      */
     public function showAction(Request $request, Projet $projet)
