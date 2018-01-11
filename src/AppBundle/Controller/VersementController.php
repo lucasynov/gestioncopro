@@ -40,7 +40,7 @@ class VersementController extends Controller
         $form = $this->createForm('AppBundle\Form\VersementType', $versement);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $versement->setProprietaire($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($versement);
             $em->flush();

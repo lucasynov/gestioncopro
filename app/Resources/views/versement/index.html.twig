@@ -10,20 +10,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Montant</th>
                 <th>Date</th>
                 <th>Type</th>
+                <th>Copropriétaire</th>
+                <th>Charge correspondante</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for versement in versements %}
             <tr>
-                <td><a href="{{ path('versement_show', { 'id': versement.id }) }}">{{ versement.id }}</a></td>
                 <td>{{ versement.montant }}</td>
                 <td>{% if versement.date %}{{ versement.date|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ versement.type }}</td>
+                <td>{{ versement.proprietaire.username }}</td>
+                <td> <a href="{{ path('charges') }}">{{ versement.charges.titre }}</a></td>
                 <td>
                     <ul>
                         <li>

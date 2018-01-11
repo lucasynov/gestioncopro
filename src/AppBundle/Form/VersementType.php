@@ -7,6 +7,14 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+use AppBundle\Entity\Charges;
+
+
+
+
 class VersementType extends AbstractType
 {
     /**
@@ -15,6 +23,11 @@ class VersementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('montant', IntegerType::class)
+                ->add('charges', EntityType::class, array(
+                'class' => Charges::class,
+                'choice_label' => 'titre',
+                'multiple' => false,
+            ))
                 ->add('date')->add('type', ChoiceType::class, array(
             'choices'  => array(
                 'Chèque' => 'Cheque',

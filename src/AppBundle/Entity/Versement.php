@@ -155,4 +155,20 @@ class Versement
     {
         $this->chargeLiee = $chargeLiee;
     }
+    
+    
+    /**
+     * @return mixed
+     */
+    public function getCharges()
+    {
+        return $this->chargeLiee;
+    }
+    /**
+     * @param mixed $chargeLiee
+     */
+    public function setCharges($chargeLiee)
+    {
+        $this->chargeLiee = $chargeLiee;
+    }
 }
