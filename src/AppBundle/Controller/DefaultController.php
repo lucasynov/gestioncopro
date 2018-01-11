@@ -130,13 +130,12 @@ class DefaultController extends Controller
      * @Route("/conversations", name="conversations")
      */
     public function showConversationAction(){
-         $ConversationUserRepository = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
+        $ConversationUserRepository = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
         
         $user = $this->getUser();
         $idUser = $user->getId();
         $conversationUsers = $ConversationUserRepository->getOurConversation($idUser);   
        
-    
         return $this->render('conversation/indexConvers.html.twig', array(
             'conversationUsers' => $conversationUsers,
             

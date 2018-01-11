@@ -3,6 +3,7 @@
 parameters:
     #parameter_name: value
     pieceJointes_directory: '%kernel.root_dir%/../web/uploads/piecesJointes'
+    compteRendu_directory: '%kernel.root_dir%/../web/uploads/CompteRendu'
 
 services:
     # default configuration for services in *this* file

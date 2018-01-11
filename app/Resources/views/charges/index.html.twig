@@ -26,7 +26,10 @@
 	        <td>{{ charge.titre }}</td>
 	        <td>{{ charge.montant }} €</td>
 	        <td>{{ charge.dateEcheance | date("m/d/Y")  }} </td>
-	       
+                <td>{% for copro in charge.copropritaires %}
+                    {{ copro.username }}<br>
+                    {% endfor %}
+                </td>
 	        <td>{{ charge.statut }}</td>
                 <td>
                     
@@ -34,6 +37,7 @@
                         <a href="{{ path('addPieceJointe', {'id_charge':  charge.id }) }}" class="btn btn-primary btn-primary"><i class="fa fa-fw fa-plus"></i></span>Ajouter une pièce jointe
                     {% else %}
                         <a href="{{ asset('uploads/piecesJointes/' ~ charge.piecejointe) }}">Voir la pièce jointe</a>
+                        <a href="{{ path('deletePieceJointe', {'id_charge':  charge.id }) }}" class="btn btn-warning btn-warning"><i class="fa fa-fw fa-trash"></i></span>Supprimer la pièce jointe
                     {% endif %}
                 </td>
 	        <td>{{ charge.idContrat }}</td>

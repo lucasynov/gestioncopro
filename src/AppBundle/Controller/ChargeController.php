@@ -83,7 +83,7 @@ class ChargeController extends Controller
      */
     public function addPieceJointe(Request $request)
     {
-        $id_charge = $_GET['id_charge'];
+        $id_charge = $request->query->get('id_charge');
         
         $ChargesRepository = $this->get('doctrine')->getRepository('AppBundle:Charges');
 
@@ -99,8 +99,7 @@ class ChargeController extends Controller
             $file = $charge->getpiecejointe();
 
             // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();          
             
             // Move the file to the directory where brochures are stored
             $file->move(
@@ -108,17 +107,15 @@ class ChargeController extends Controller
                 $fileName
             );
             
-            
             // Update the 'brochure' property to store the PDF file name
             // instead of its contents
-            $charge->setpieceJointe($fileName);
+            $charge->setCompteRendu($fileName);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($charge);
             $em->flush();
 
-
-             return $this->redirectToRoute('charges');
+            return $this->redirectToRoute('charges');
         }
        
         
@@ -129,6 +126,27 @@ class ChargeController extends Controller
     }
     
     
+     /**
+     * @Route("/deletePj/", name="deletePieceJointe")
+     */
+    public function deletePieceJointe(Request $request){
+        $id_charge = $request->query->get('id_charge');
+        $ChargesRepository = $this->get('doctrine')->getRepository('AppBundle:Charges');
+        $charge = $ChargesRepository->findOneBy(['id' => $id_charge]);
+        $charge->setpieceJointe(null);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($charge);
+        $em->flush();
+        
+        $this->addFlash(
+            'notice',
+            'La piece jointe a été supprimée !!'
+        );
+        
+        return $this->redirectToRoute('charges');
+    }
+    
     
     
     
@@ -138,7 +156,7 @@ class ChargeController extends Controller
      */
     public function archiveCharge(Request $request)
     {
-        $id_charge = $_GET['id_charge'];
+        $id_charge = $request->query->get('id_charge');
         
         
         $ChargesRepository = $this->get('doctrine')->getRepository('AppBundle:Charges');

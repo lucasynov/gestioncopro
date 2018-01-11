@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Projet {{ projet.nom }} </h1>
+        <div class="panel-body">
+            <table class="table">
+                <tbody>
+
+                <tr>
+                    <th>Description</th>
+                    <td>{{ projet.description }}</td>
+                </tr>
+                <tr>
+                    <th>Statut</th>
+                    <td>{{ projet.statut }}</td>
+                </tr>
+                <tr>
+                    <th>Date d'ouverture</th>
+                    <td>{% if projet.dateOuverture %}{{ projet.dateOuverture|date('Y-m-d') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Date de cloture</th>
+                    <td>{% if projet.dateCloture %}{{ projet.dateCloture|date('Y-m-d') }}{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+            
+
+{% endblock %}

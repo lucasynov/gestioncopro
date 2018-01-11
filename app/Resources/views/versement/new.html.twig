@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Création d'un versement</h1>
+
+
+
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+    <input type="submit" value="Créer" class="btn btn-default"/>
+    {{ form_end(form) }}
+
+
+{% endblock %}

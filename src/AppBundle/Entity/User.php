@@ -150,4 +150,11 @@ class User implements UserInterface, \Serializable
     {
         $this->charges->remove($charge);
     }
+    
+    
+    function setCharges($charges) {
+        $this->charges = $charges;
+    }
+
+
 }

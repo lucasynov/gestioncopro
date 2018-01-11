@@ -32,28 +32,40 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Copropriétaires">
           <a class="nav-link" href="{{ path('coproprietaire') }}">
             <i class="fa fa-fw fa-address-book "></i>
             <span class="nav-link-text">Copropriétaires</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Réunions">
           <a class="nav-link" href="{{ path('reunions') }}">
             <i class="fa fa-fw fa-calendar-o"></i>
             <span class="nav-link-text">Réunions</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Conversations">
           <a class="nav-link"  href="{{ path('conversations') }}">
             <i class="fa fa-fw fa-comments"></i>
             <span class="nav-link-text">Conversations</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charges">
           <a class="nav-link" href="{{ path('charges') }}">
             <i class="fa fa-fw fa-euro "></i>
             <span class="nav-link-text">Charges</span>
+          </a>
+        </li>
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Projets">
+          <a class="nav-link" href="{{ path('projet_index') }}">
+            <i class="fa fa-fw fa-folder "></i>
+            <span class="nav-link-text">Projets </span>
+          </a>
+        </li>
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Versements">
+          <a class="nav-link" href="{{ path('versement_index') }}">
+            <i class="fa fa-fw fa-euro "></i>
+            <span class="nav-link-text">Versements </span>
           </a>
         </li>
       </ul>
@@ -130,6 +142,14 @@
 
     </script>
     <!-- Toggle between dark and light navbar-->
+    
+    
+    
+    
+    
+    
+    
+    
     <script>
     $('#toggleNavColor').click(function() {
       $('nav').toggleClass('navbar-dark navbar-light');

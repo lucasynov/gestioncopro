@@ -3,7 +3,12 @@
 
 namespace AppBundle\Entity;
 
+
+
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Table(name="app_reunion")
@@ -34,13 +39,23 @@ class Reunion
     private $organisateur;
 
     /**
-     * @ORM\Column(name="compte_rendu", type="string", length=100 ,nullable=true)
+     * @ORM\Column(name="compteRendu", type="string" ,nullable=true)
+     * 
+     * @Assert\File(mimeTypes={ "application/pdf" })
      */
-    private $compte_rendu;
+    private $compteRendu;
 
+    
 
+    function getCompteRendu() {
+        return $this->compteRendu;
+    }
 
+    function setCompteRendu($compteRendu) {
+        $this->compteRendu = $compteRendu;
+    }
 
+    
     public function __construct()
     {
        
@@ -66,12 +81,7 @@ class Reunion
         return $this->organisateur;
     }
 
-    public function getCompte_Rendu()
-    {
-        return $this->compte_rendu;
-    }
-
-
+        
 
     /**
      * Set date

@@ -23,7 +23,14 @@
 	        <td>{{ reunion.date | date("m/d/Y   H:i") }}</td>
 	        <td>{{ reunion.name }}</td>
 	        <td>{{ reunion.organisateur }}</td>
-	        <td>{{ reunion.compte_rendu }}</td>
+                <td>
+                    {% if(reunion.compteRendu) is null %}
+                        <a href="{{ path('addPieceJointeCr', {'id_reunion':  reunion.id }) }}" class="btn btn-primary btn-primary"><i class="fa fa-fw fa-plus"></i></span>Ajouter un compte rendu
+                    {% else %}
+                        <a href="{{ asset('uploads/CompteRendu/' ~ reunion.compteRendu) }}">Voir le compte rendu</a>
+                        <a href="{{ path('deletePieceJointeCr', {'id_reunion':  reunion.id }) }}" class="btn btn-warning btn-warning"><i class="fa fa-fw fa-trash"></i></span>Supprimer le compte rendu
+                    {% endif %}
+                </td>
 	    </tr>
 	    {% endfor %}
 	</table>

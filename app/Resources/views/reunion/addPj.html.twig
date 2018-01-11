@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Ajouter un Compte Rendu</h3>
+
+    {{ form_start(form) }}
+        {{ form_row(form.compteRendu) }}
+        
+         <button type="submit"  method='POST' class="btn btn-info">Ajouter ce compte rendu</button>
+    {{ form_end(form) }}
+
+{% endblock %}
