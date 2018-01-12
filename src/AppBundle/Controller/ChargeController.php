@@ -41,6 +41,7 @@ class ChargeController extends Controller
                 'class' => User::class,
                 'choice_label' => 'username',
                 'multiple' => true,
+                'expanded' => true
             ))
             ->add('montant', NumberType::class)
             ->add('dateEcheance', DateType::class, array('label' => "Date d'échéance"))
@@ -94,13 +95,16 @@ class ChargeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            
             // $file stores the uploaded PDF file
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $charge->getpiecejointe();
 
+
             // Generate a unique name for the file before saving it
             $fileName = md5(uniqid()).'.'.$file->guessExtension();          
-            
+
             // Move the file to the directory where brochures are stored
             $file->move(
                 $this->getParameter('pieceJointes_directory'),
@@ -109,7 +113,7 @@ class ChargeController extends Controller
             
             // Update the 'brochure' property to store the PDF file name
             // instead of its contents
-            $charge->setCompteRendu($fileName);
+            $charge->setpieceJointe($fileName);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($charge);

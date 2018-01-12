@@ -55,7 +55,7 @@ class User implements UserInterface, \Serializable
      */
     private $charges;
     
-   
+
 
 
     
@@ -149,6 +149,11 @@ class User implements UserInterface, \Serializable
     public function removeCharge($charge)
     {
         $this->charges->remove($charge);
+    }
+    
+    
+    public function getCharges(){
+        return $this->charges;
     }
     
     

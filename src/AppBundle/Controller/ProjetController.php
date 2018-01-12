@@ -52,7 +52,7 @@ class ProjetController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
            
-            //Pour la gestuion des mails mais je crois que ca ne marche pas en local
+            //Pour la gestion des mails mais je crois que ca ne marche pas en local
             //
 //            foreach($projet->getPersonnesConcernees() as $proprietaire){
 //                $proprietaire->addProjet($projet);
@@ -70,6 +70,28 @@ class ProjetController extends Controller
 //            }
             
             
+            if($projet->getFilDiscussion() == true){
+                $UserRepository = $this->get('doctrine')->getRepository('AppBundle:User');
+                $ConversUserRepo = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
+                $users = $UserRepository->findAll();
+                
+                $conversation = new Conversation();
+                $conversation->setName('Conversation Projet '.$projet->getNom());
+                
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($conversation);
+                $em->flush();
+                $id_conversation = $conversation->getId();
+                
+                foreach($users as $key => $user){
+                    $ConversUserRepo->insertConversationUser($user->getId(),$id_conversation);
+                }
+                $projet->setFilDiscussion($conversation);
+            }else{
+                $projet->setFilDiscussion(null);
+            }
+            
+            $projet->setStatut('En discussion');
             $em = $this->getDoctrine()->getManager();
             $em->persist($projet);
             $em->flush();
@@ -80,6 +102,65 @@ class ProjetController extends Controller
             'form' => $form->createView(),
         ));
     }
+    
+    
+    /**
+     * Finds and displays a projet entity.
+     *
+     * @Route("/projectsAddConvers/{id}", name="addProjetConversation")
+     * @Method({"GET", "POST"})
+     */
+    public function addProjetConversation(Request $request, Projet $projet){
+        
+        $UserRepository = $this->get('doctrine')->getRepository('AppBundle:User');
+        $ConversUserRepo = $this->get('doctrine')->getRepository('AppBundle:ConversationUser');
+        $users = $UserRepository->findAll();
+
+        $conversation = new Conversation();
+        $conversation->setName('Conversation Projet '.$projet->getNom());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($conversation);
+        $em->flush();
+        $id_conversation = $conversation->getId();
+
+        foreach($users as $key => $user){
+            $ConversUserRepo->insertConversationUser($user->getId(),$id_conversation);
+        }
+        $projet->setFilDiscussion($conversation);
+            
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($projet);
+        $em->flush();
+        
+        return $this->redirectToRoute('projet_show', array('id' => $projet->getId()));
+    }
+
+    
+    /**
+     *
+     * @Route("/addProjetPj/{id}", name="addProjetPj")
+     * @Method({"GET", "POST"})
+     */
+    public function addProjetPj(Request $request, Projet $projet){
+        dump($projet);die;
+        
+    }
+    
+    
+    /**
+     *
+     * @Route("/deleteProjetPj/{id}", name="deletePieceJointeProjet")
+     * @Method({"GET", "POST"})
+     */
+    public function deletePieceJointeProjet(Request $request, Projet $projet){
+        dump($projet);die;
+    }
+    
+    
+    
+    
     /**
      * Finds and displays a projet entity.
      *
@@ -87,9 +168,17 @@ class ProjetController extends Controller
      * @Method({"GET", "POST"})
      */
     public function showAction(Request $request, Projet $projet)
-    {
+    {      
+        $conversation = null;
+        $ConversationRepository = $this->get('doctrine')->getRepository('AppBundle:Conversation');
+        
+        if($projet->getFilDiscussion() != null){
+            $conversation = $ConversationRepository->findOneBy(['id' => $projet->getFilDiscussion()->getId()]);
+        }
+        
         return $this->render('projet/show.html.twig', array(
             'projet' => $projet,
+            'conversation' => $conversation,
         ));
     }
     

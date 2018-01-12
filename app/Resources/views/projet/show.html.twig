@@ -25,10 +25,46 @@
                 </tr>
                 </tbody>
             </table>
-
         </div>
-
-
+                
+                
+    <h2>Discussion Associée</h2>
+    {% if conversation is null %}
+        <p>Aucune conversation en cours.</p>
+        <a href="{{ path('addProjetConversation', {'id': projet.id}) }}" class="btn btn-primary btn-info"><i class="fa fa-fw fa-comments"></i></span>Ajouter une conversation à ce projet</a>
+    {% else %}
+         <table class="table table-dark" >
+            <tr>
+                    <th>Nom de la conversation</th>
+                    <th>Actions</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                            <th>Administration</th>
+                    {% endif %}
+            </tr>
+            <tr>
+                <td>{{ conversation.name }}</td>
+                <td><a href="{{ path('showConversation', {'id_conversation': conversation.id}) }}" class="btn btn-primary btn-info"><i class="fa fa-fw fa-comments"></i></span>Converser</a></td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td><a href="{{ path('archiveConversation', {'id_conversation': conversation.id}) }}" class="btn btn-primary btn-danger"><i class="fa fa-fw fa-trash-o"></i></span>Archiver</a>
+                {% endif %}
+            </tr>
+        </table>
+    {% endif %}
+    <br><br>
+    
+    <h2>Pièce jointes associé à ce projet</h2>
+    {% if projet.piecesJointes is null %}
+        <p>Aucune pièce jointes.</p>
+        <a href="{{ path('addProjetPj', {'id': projet.id}) }}" class="btn btn-primary btn-info"><i class="fa fa-fw fa-download"></i></span>Ajouter une pièce jointe à ce projet</a>
+    {% else %}
+        <a href="{{ asset('uploads/ProjetPj/' ~ projet.piecesJointes) }}">Voir la pièce jointe</a>
+        <a href="{{ path('deletePieceJointeProjet', {'id':  projet.id }) }}" class="btn btn-warning btn-warning"><i class="fa fa-fw fa-trash"></i></span>Supprimer la pièce jointe
+    {% endif %}
+    
+    
+                  
+    
+    <br>
             
 
 {% endblock %}

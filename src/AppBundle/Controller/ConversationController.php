@@ -95,6 +95,13 @@ class ConversationController extends Controller
         $conversation = new Conversation();
         $conversation = $ConversationRepository->findOneBy(['id' => $id_conversation]);
         
+        $ProjetRepository = $this->get('doctrine')->getRepository('AppBundle:Projet');
+        $projet = $ProjetRepository->findOneBy(['filDiscussion' => $id_conversation]);
+
+        if($projet != null){
+            $projet->setFilDiscussion(null);
+        }
+        
         $em = $this->getDoctrine()->getManager();
         $em->remove($conversation);
         $em->flush();

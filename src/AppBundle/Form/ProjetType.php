@@ -6,6 +6,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
+
 class ProjetType extends AbstractType
 {
     /**
@@ -14,7 +17,12 @@ class ProjetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nom')->add('description')
-            ->add('dateOuverture',DateType::class,['label' => 'Date d\'ouverture'])->add('dateCloture',DateType::class,['label' => 'Date de cloture']);
+            ->add('dateOuverture',DateType::class,['label' => 'Date d\'ouverture'])
+            ->add('dateCloture',DateType::class,['label' => 'Date de cloture'])
+            ->add('filDiscussion', CheckboxType::class, array(
+                    'label'    => 'Ajouter une conversation à ce projet',
+                    'required' => false,
+                ));
     }
     
     /**
