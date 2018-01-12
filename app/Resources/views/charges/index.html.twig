@@ -47,7 +47,10 @@
                 </td>
 	        
                 {% if is_granted('ROLE_ADMIN') %}
-			<td><a href="{{ path('archiveCharge', {'id_charge':  charge.id }) }}" class="btn btn-primary btn-danger"><i class="fa fa-fw fa-trash-o"></i></span>Archiver                        
+                    <td>
+                        <a href="{{ path('archiveCharge', {'id_charge':  charge.id }) }}" class="btn btn-primary btn-danger"><i class="fa fa-fw fa-trash-o"></i></span>Archiver   
+                         <a href="{{ path('editCharge', {'id':  charge.id }) }}" class="btn btn-primary btn-info"><i class="fa fa-fw fa-edit"></i></span>Modifier 
+                    </td>
                 {% endif %}
 	    </tr>
 	    {% endfor %}

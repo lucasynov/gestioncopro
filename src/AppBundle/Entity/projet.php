@@ -57,14 +57,14 @@ class Projet
     
     
     /**
-     * @ORM\OneToOne(targetEntity="Conversation")
-     * @ORM\JoinColumn(name="projetId", referencedColumnName="id", nullable=false)
+     * @ORM\OneToOne(targetEntity="Conversation", cascade={"all"})
+     * @ORM\JoinColumn(name="discussion_id", referencedColumnName="id", nullable=true)
      */
     private $filDiscussion;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Sondage", mappedBy="idProjet")
+     * @ORM\OneToMany(targetEntity="Sondage", mappedBy="idProjet", cascade={"all"})
      */
     private $listeSondage;
     

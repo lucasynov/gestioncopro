@@ -238,6 +238,7 @@ class ProjetController extends Controller
      */
     public function editAction(Request $request, Projet $projet)
     {
+        $projet->setPiecesJointes(null);
         $editForm = $this->createFormBuilder($projet)->add('description')->add('statut', ChoiceType::class, array(
             'choices'  => array(
                 'En discussion' => 'En discussion',
@@ -265,7 +266,7 @@ class ProjetController extends Controller
      * @Route("/delete/{id}", name="projet_delete")
      */
     public function deleteAction(Request $request, Projet $projet)
-    {
+    { 
         $projet->setPersonnesConcernees(null);
         $projet->setListeSondage(null);
      

@@ -31,6 +31,12 @@ class Conversation
     private $copropritaires;
     
     
+    /**
+     * @ORM\OneToOne(targetEntity="Projet")
+     */  
+    private $projet;
+    
+    
     
     
 

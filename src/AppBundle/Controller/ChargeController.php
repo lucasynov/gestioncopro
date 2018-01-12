@@ -83,6 +83,59 @@ class ChargeController extends Controller
    
     
     
+      /**
+     * @Route("/editCharge/{id}", name="editCharge")
+     */
+    public function editAction(Request $request, Charges $charge)
+    {
+        if($charge->getstatut() == 1){
+            $charge->setstatut(true);
+        }else{
+            $charge->setstatut(false);
+        }
+        
+        $charge->setpieceJointe(null);
+        
+        $form = $this->createFormBuilder($charge)
+            ->add('titre', TextType::class)
+            ->add('montant', NumberType::class)
+            ->add('dateEcheance', DateType::class, array('label' => "Date d'échéance"))
+            ->add('statut', CheckboxType::class, array('label' => 'Payé', 'required' => false))
+            ->getForm();
+
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){        
+            
+            if($charge->getstatut() == true){
+                $charge->setstatut(1);
+            }else{
+                $charge->setstatut(0);
+            }
+           
+   
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($charge);
+            $em->flush();
+
+
+          $this->addFlash(
+                'notice',
+                'La charge a bien été modifié !!'
+            );
+
+            return $this->redirectToRoute('charges');
+        }
+        
+        return $this->render('charges/editCharges.html.twig', array(
+            'form' => $form->createView(),
+        ));   
+    }
+    
+    
+    
+    
+    
     
     
     /**

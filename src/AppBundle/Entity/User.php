@@ -55,6 +55,9 @@ class User implements UserInterface, \Serializable
      */
     private $charges;
     
+    
+    
+    
 
 
 
