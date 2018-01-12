@@ -57,7 +57,7 @@
         <p>Aucune pièce jointes.</p>
         <a href="{{ path('addProjetPj', {'id': projet.id}) }}" class="btn btn-primary btn-info"><i class="fa fa-fw fa-download"></i></span>Ajouter une pièce jointe à ce projet</a>
     {% else %}
-        <a href="{{ asset('uploads/ProjetPj/' ~ projet.piecesJointes) }}">Voir la pièce jointe</a>
+        <a href="{{ asset('uploads/ProjetPieceJointe/' ~ projet.piecesJointes) }}">Voir la pièce jointe</a>
         <a href="{{ path('deletePieceJointeProjet', {'id':  projet.id }) }}" class="btn btn-warning btn-warning"><i class="fa fa-fw fa-trash"></i></span>Supprimer la pièce jointe
     {% endif %}
     

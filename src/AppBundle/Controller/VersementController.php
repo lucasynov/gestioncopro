@@ -5,6 +5,8 @@ use AppBundle\Entity\Versement;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\FileVersementType;
+
 /**
  * Versement controller.
  *
@@ -131,6 +133,74 @@ class VersementController extends Controller
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+    
+    
+    
+    
+    /**
+     * @Route("/addPieceJointeVersement/{id}", name="addPieceJointeVersement")
+     */
+    public function addPieceJointeVersement(Request $request, Versement $versement)
+    {
+        
+        $form = $this->createForm(FileVersementType::class, $versement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            
+            // $file stores the uploaded PDF file
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $versement->getPiecesJointes();
+
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();          
+
+            // Move the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('pieceJointeVersement_directory'),
+                $fileName
+            );
+            
+            // Update the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $versement->setpiecesJointes($fileName);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($versement);
+            $em->flush();
+
+            return $this->redirectToRoute('versement_index');
+        }
+       
+        
+        return $this->render('versement/addPj.html.twig', array(
+            'form' => $form->createView(),
+        ));
+        
+    }
+    
+    
+     /**
+     * @Route("/deletePieceJointeVersement/{id}", name="deletePieceJointeVersement")
+     */
+    public function deletePieceJointeVersement(Request $request, Versement $versement){
+       
+        
+        $versement->setpiecesJointes(null);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($versement);
+        $em->flush();
+        
+        $this->addFlash(
+            'notice',
+            'La piece jointe a été supprimée !!'
+        );
+        
+        return $this->redirectToRoute('versement_index');
     }
     
 }

@@ -15,7 +15,6 @@
 			<th>Copropriétaire </th>
 			<th>Statut</th>
 			<th>Pièce jointe </th>
-			<th>Contrat  </th>
                         {% if is_granted('ROLE_ADMIN') %}
                             <th></th>                        
                         {% endif %}
@@ -30,7 +29,13 @@
                     {{ copro.username }}<br>
                     {% endfor %}
                 </td>
-	        <td>{{ charge.statut }}</td>
+	        <td>
+                    {% if(charge.statut) == 1 %}
+                        Payé
+                    {% else %}
+                        Non payé
+                    {% endif %} 
+                </td>
                 <td>
                     
                     {% if(charge.piecejointe) is null %}
@@ -40,7 +45,7 @@
                         <a href="{{ path('deletePieceJointe', {'id_charge':  charge.id }) }}" class="btn btn-warning btn-warning"><i class="fa fa-fw fa-trash"></i></span>Supprimer la pièce jointe
                     {% endif %}
                 </td>
-	        <td>{{ charge.idContrat }}</td>
+	        
                 {% if is_granted('ROLE_ADMIN') %}
 			<td><a href="{{ path('archiveCharge', {'id_charge':  charge.id }) }}" class="btn btn-primary btn-danger"><i class="fa fa-fw fa-trash-o"></i></span>Archiver                        
                 {% endif %}

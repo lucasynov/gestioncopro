@@ -8,13 +8,13 @@
 	<br>
 	<a href="{{ path('AddReunion') }}" class="btn btn-success btn-success"><span class="glyphicon glyphicon-pencil"></span> Organiser une réunion</a>
 	<br><br>
-	<p>Si vous voulez organiser une réunion, cette réunion sera organisé par défaut à votre docmicile.</p>
 	<p>Vous pourrez à la suite de la réunion joindre un compte rendu de cette réunion.</p>
 	<table class="table table-dark" >
 		<tr>
 			<th>Date</th>
 			<th>Nom de la réunion</th>
 			<th>Organisateur</th>
+                        <th>Lieu</th>
 			<th>Compte Rendu</th>
 		</tr>
 
@@ -23,6 +23,7 @@
 	        <td>{{ reunion.date | date("m/d/Y   H:i") }}</td>
 	        <td>{{ reunion.name }}</td>
 	        <td>{{ reunion.organisateur }}</td>
+                <td>{{ reunion.lieu }}</td>
                 <td>
                     {% if(reunion.compteRendu) is null %}
                         <a href="{{ path('addPieceJointeCr', {'id_reunion':  reunion.id }) }}" class="btn btn-primary btn-primary"><i class="fa fa-fw fa-plus"></i></span>Ajouter un compte rendu

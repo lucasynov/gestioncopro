@@ -23,7 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-use AppBundle\Form\FileType;
+use AppBundle\Form\FileChargeType;
 
 
 class ChargeController extends Controller
@@ -51,7 +51,13 @@ class ChargeController extends Controller
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){        
-            $charge->setstatut(0);
+            
+            if($charge->getstatut() == true){
+                $charge->setstatut(1);
+            }else{
+                $charge->setstatut(0);
+            }
+            
             $charge->setcopropritaires($charge->getcopropritaires());
    
             $em = $this->getDoctrine()->getManager();
@@ -91,7 +97,7 @@ class ChargeController extends Controller
         $charge = new Charges();
         $charge = $ChargesRepository->findOneBy(['id' => $id_charge]);
         
-        $form = $this->createForm(FileType::class, $charge);
+        $form = $this->createForm(FileChargeType::class, $charge);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

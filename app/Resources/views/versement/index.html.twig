@@ -15,6 +15,7 @@
                 <th>Type</th>
                 <th>Copropriétaire</th>
                 <th>Charge correspondante</th>
+                <th>Pièce Jointe</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,6 +27,14 @@
                 <td>{{ versement.type }}</td>
                 <td>{{ versement.proprietaire.username }}</td>
                 <td> <a href="{{ path('charges') }}">{{ versement.charges.titre }}</a></td>
+                <td>
+                    {% if(versement.piecesJointes) is null %}
+                        <a href="{{ path('addPieceJointeVersement', {'id':  versement.id }) }}" class="btn btn-primary btn-primary"><i class="fa fa-fw fa-plus"></i></span>Ajouter une pièce jointe
+                    {% else %}
+                        <a href="{{ asset('uploads/VersementPieceJointe/' ~ versement.piecesjointes) }}">Voir la pièce jointe</a>
+                        <a href="{{ path('deletePieceJointeVersement', {'id':  versement.id }) }}" class="btn btn-warning btn-warning"><i class="fa fa-fw fa-trash"></i></span>Supprimer la pièce jointe
+                    {% endif %}
+                </td>
                 <td>
                     <ul>
                         <li>

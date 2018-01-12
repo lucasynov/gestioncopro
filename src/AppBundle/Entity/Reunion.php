@@ -44,10 +44,24 @@ class Reunion
      * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $compteRendu;
+    
+    
+     /**
+     * @ORM\Column(name="lieu", type="string" ,nullable=true)
+     * 
+     */
+    private $lieu;
 
     
+    function getLieu() {
+        return $this->lieu;
+    }
 
-    function getCompteRendu() {
+    function setLieu($lieu) {
+        $this->lieu = $lieu;
+    }
+
+        function getCompteRendu() {
         return $this->compteRendu;
     }
 

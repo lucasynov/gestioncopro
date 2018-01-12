@@ -136,6 +136,8 @@ class ProjetController extends Controller
         
         return $this->redirectToRoute('projet_show', array('id' => $projet->getId()));
     }
+    
+    
 
     
     /**
@@ -144,8 +146,40 @@ class ProjetController extends Controller
      * @Method({"GET", "POST"})
      */
     public function addProjetPj(Request $request, Projet $projet){
-        dump($projet);die;
         
+        $form = $this->createForm(\AppBundle\Form\ProjetPjType::class, $projet);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $file stores the uploaded PDF file
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+
+            
+            $file = $projet->getPiecesJointes();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();          
+            
+            // Move the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('pieceJointeProjet_directory'),
+                $fileName
+            );
+            
+            // Update the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $projet->setPiecesJointes($fileName);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($projet);
+            $em->flush();
+
+            return $this->redirectToRoute('projet_show',['id' => $projet->getId()]);
+        }
+       
+        return $this->render('projet/addPj.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
     
     
@@ -155,7 +189,20 @@ class ProjetController extends Controller
      * @Method({"GET", "POST"})
      */
     public function deletePieceJointeProjet(Request $request, Projet $projet){
-        dump($projet);die;
+
+        $projet->setPiecesJointes(null);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($projet);
+        $em->flush();
+        
+        $this->addFlash(
+            'notice',
+            'La piece jointe a été supprimée !!'
+        );
+        
+        return $this->redirectToRoute('projet_show',['id' => $projet->getId()]);
+    
     }
     
     

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Ajouter une Piece jointe</h3>
+
+    {{ form_start(form) }}
+        {{ form_row(form.piecesJointes) }}
+         <button type="submit"  method='POST' class="btn btn-info">Ajouter une pièce jointe</button>
+    {{ form_end(form) }}
+
+{% endblock %}

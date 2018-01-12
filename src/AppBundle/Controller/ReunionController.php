@@ -38,11 +38,13 @@ class ReunionController extends Controller
                 }
                
                 $name = $_POST['name'];
+                $lieu = $_POST['lieu'];
                 $user = $this->getUser();
                 $username = $user->getUsername();
 
                 $reunion = new Reunion();
                 $reunion->setName($name);
+                $reunion->setLieu($lieu);
                 $reunion->setDate($date_format);
                 $reunion->setOrganisateur($username);
                 $reunion->setId();
